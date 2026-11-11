@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>나만의 취업 프로필</title>
+<style>
+:root{--bg:#f4f0e9;--paper:#fff;--ink:#302d29;--muted:#81796f;--line:#e8e1d7;--accent:#9a8063;--accent-dark:#755d45;--soft:#f8f5f0;--shadow:0 12px 35px rgba(62,48,32,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"Noto Sans KR",sans-serif;line-height:1.6}button,input,textarea{font:inherit}button{cursor:pointer}.topbar{background:rgba(255,255,255,.82);border-bottom:1px solid var(--line);padding:16px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:5;backdrop-filter:blur(10px)}.brand{font-weight:800;letter-spacing:.04em}.brand span{color:var(--accent)}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);border-radius:9px;padding:9px 13px;background:#fff;color:var(--ink);font-weight:650}.btn.primary{background:var(--accent-dark);border-color:var(--accent-dark);color:white}.btn:hover{filter:brightness(.97)}.wrap{max-width:1400px;margin:30px auto;padding:0 22px}.intro{margin:0 0 22px}.intro h1{font-family:Georgia,"Noto Serif KR",serif;font-size:clamp(27px,4vw,40px);font-weight:600;margin:0 0 6px}.intro p{color:var(--muted);margin:0}.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,.88fr);gap:22px;align-items:start}.panel{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:19px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.panel-head h2{font-size:17px;margin:0}.panel-head small{color:var(--muted)}.form-body{padding:22px}.section{padding:0 0 22px;margin:0 0 22px;border-bottom:1px solid var(--line)}.section:last-child{border:0;padding:0;margin:0}.section h3{font-size:14px;letter-spacing:.04em;margin:0 0 14px;color:var(--accent-dark)}.field{margin:0 0 14px}.field:last-child{margin-bottom:0}label{display:block;font-size:13px;font-weight:700;margin:0 0 6px}.hint{font-size:11px;color:var(--muted);font-weight:400;margin-left:5px}input[type=text],input[type=url],textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px 12px;background:#fdfcfb;color:var(--ink);outline:none}input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(154,128,99,.12)}textarea{resize:vertical;min-height:88px} .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.upload{border:1px dashed #cfc2b2;border-radius:10px;padding:13px;background:var(--soft)}input[type=file]{width:100%;font-size:12px}.file-note{font-size:11px;color:var(--muted);margin-top:5px}.preview-wrap{position:sticky;top:88px}.preview{padding:26px}.preview-top{display:flex;align-items:center;gap:18px;padding-bottom:21px;border-bottom:1px solid var(--line)}.avatar{width:104px;height:104px;flex:0 0 104px;border-radius:50%;background:var(--soft);border:3px solid #eee7dd;display:grid;place-items:center;overflow:hidden;color:var(--muted);font-size:12px}.avatar img{width:100%;height:100%;object-fit:cover}.preview-name{font-family:Georgia,"Noto Serif KR",serif;font-size:28px;line-height:1.25;margin:0 0 5px;overflow-wrap:anywhere}.preview-sub{color:var(--muted);font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}.preview-section{padding:18px 0;border-bottom:1px solid var(--line)}.preview-section:last-child{border:0}.preview-section h3{font-size:12px;letter-spacing:.14em;color:var(--accent-dark);margin:0 0 9px}.preview-section p{font-size:13px;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.chips{display:flex;flex-wrap:wrap;gap:7px}.chip{font-size:12px;background:var(--soft);border:1px solid var(--line);padding:5px 10px;border-radius:30px;color:#5e5144}.link-list{display:grid;gap:8px}.link-item{font-size:13px;padding:9px 11px;background:var(--soft);border-radius:8px;overflow-wrap:anywhere}.link-item a{color:var(--accent-dark);text-decoration:none;font-weight:700}.link-item a:hover{text-decoration:underline}.ppt-item{display:flex;align-items:center;gap:9px;padding:10px;background:var(--soft);border-radius:8px;font-size:12px;overflow-wrap:anywhere}.empty{color:#aaa;font-style:italic}.footer-note{text-align:center;color:var(--muted);font-size:11px;margin:18px 0 30px}.status{font-size:11px;color:var(--muted);margin-left:auto;padding-right:8px}.hidden{display:none!important}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.preview-wrap{position:static}.topbar{position:static}.wrap{margin:22px auto;padding:0 14px}}
+@media(max-width:520px){.topbar{padding:12px 14px;align-items:flex-start;flex-direction:column}.actions{width:100%}.btn{flex:1;padding:8px 9px;font-size:12px}.form-body,.preview{padding:17px}.two{grid-template-columns:1fr}.preview-top{gap:12px}.avatar{width:82px;height:82px;flex-basis:82px}.preview-name{font-size:23px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="brand">MY <span>PROFILE</span></div><div class="actions"><span class="status" id="saveStatus">아직 저장되지 않았습니다</span><button class="btn" id="saveBtn">저장</button><button class="btn" id="loadBtn">불러오기</button><button class="btn" id="exportBtn">JSON 백업</button><button class="btn" id="importBtn">JSON 복원</button><input class="hidden" type="file" id="jsonFile" accept=".json,application/json"></div></header>
+<main class="wrap">
+<div class="intro"><h1>나만의 취업 프로필</h1><p>나의 경험과 역량을 정리하고, 한눈에 볼 수 있는 프로필을 만들어 보세요.</p></div>
+<div class="layout">
+<section class="panel"><div class="panel-head"><h2>프로필 작성</h2><small>입력 즉시 오른쪽에 반영됩니다</small></div><div class="form-body">
+<div class="section"><h3>01 · 기본 정보</h3><div class="field"><label for="photo">프로필 사진</label><div class="upload"><input type="file" id="photo" accept="image/*"><div class="file-note">JPG, PNG 등 이미지 파일 권장 · 2MB 이하 권장</div></div></div><div class="field"><label for="name">이름</label><input id="name" type="text" placeholder="홍길동"></div><div class="field"><label for="introText">자기소개</label><textarea id="introText" placeholder="나를 소개하는 문장을 작성해 보세요."></textarea></div></div>
+<div class="section"><h3>02 · 핵심 역량</h3><div class="field"><label for="strengths">핵심 역량 <span class="hint">쉼표 또는 줄바꿈으로 구분</span></label><textarea id="strengths" placeholder="문제 해결 능력, 원활한 커뮤니케이션, 프로젝트 기획"></textarea></div><div class="field"><label for="skills">보유 기술</label><textarea id="skills" placeholder="HTML, CSS, JavaScript, Photoshop"></textarea></div></div>
+<div class="section"><h3>03 · 학력 및 경력</h3><div class="field"><label for="education">학력</label><textarea id="education" placeholder="2020.03 - 2024.02  ○○대학교 ○○학과 졸업"></textarea></div><div class="field"><label for="career">경력</label><textarea id="career" placeholder="2024.03 - 현재  ○○회사 / 담당 업무 및 주요 성과"></textarea></div></div>
+<div class="section"><h3>04 · 자격 및 프로젝트</h3><div class="field"><label for="certs">자격증</label><textarea id="certs" placeholder="2024  ○○ 자격증"></textarea></div><div class="field"><label for="projects">프로젝트 및 영상 링크 <span class="hint">한 줄에 하나씩: 제목 | URL</span></label><textarea id="projects" placeholder="개인 포트폴리오 | https://example.com&#10;프로젝트 소개 영상 | https://youtu.be/..."></textarea></div></div>
+<div class="section"><h3>05 · 포트폴리오 파일</h3><div class="field"><label for="ppt">포트폴리오 PPT 업로드</label><div class="upload"><input type="file" id="ppt" accept=".ppt,.pptx,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation"><div class="file-note">PPT/PPTX 파일을 선택하면 브라우저에 보관하고 미리보기에 표시합니다. 서버로 전송되지 않습니다.</div></div></div></div>
+</div></section>
+<aside class="preview-wrap"><section class="panel"><div class="panel-head"><h2>실시간 미리보기</h2><small>PROFILE</small></div><div class="preview" id="preview">
+<div class="preview-top"><div class="avatar" id="previewAvatar">사진 없음</div><div><h2 class="preview-name" id="pName">이름을 입력해 주세요</h2><div class="preview-sub" id="pIntro">자기소개가 여기에 표시됩니다.</div></div></div>
+<div class="preview-section"><h3>CORE STRENGTHS · 핵심 역량</h3><div class="chips" id="pStrengths"><span class="empty">핵심 역량을 입력해 주세요.</span></div></div>
+<div class="preview-section"><h3>EDUCATION · 학력</h3><p id="pEducation" class="empty">학력 정보를 입력해 주세요.</p></div>
+<div class="preview-section"><h3>EXPERIENCE · 경력</h3><p id="pCareer" class="empty">경력 정보를 입력해 주세요.</p></div>
+<div class="preview-section"><h3>CERTIFICATIONS · 자격증</h3><p id="pCerts" class="empty">자격증 정보를 입력해 주세요.</p></div>
+<div class="preview-section"><h3>SKILLS · 보유 기술</h3><div class="chips" id="pSkills"><span class="empty">보유 기술을 입력해 주세요.</span></div></div>
+<div class="preview-section"><h3>PROJECTS & VIDEO · 프로젝트 / 영상</h3><div class="link-list" id="pProjects"><span class="empty">프로젝트 또는 영상 링크를 추가해 주세요.</span></div></div>
+<div class="preview-section"><h3>PORTFOLIO · 포트폴리오</h3><div id="pPpt" class="empty">PPT 파일을 업로드해 주세요.</div></div>
+</div></section><p class="footer-note">깔끔한 내용과 구체적인 성과를 중심으로 작성해 보세요.</p></aside>
+</div></main>
+<script>
+const STORAGE_KEY='myJobProfile_v1';
+const fields=['name','introText','strengths','skills','education','career','certs','projects'];
+let photoData='',pptData='',pptName='';
+const $=id=>document.getElementById(id);
+function esc(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function lines(value){return value.split(/[\n,，]/).map(s=>s.trim()).filter(Boolean)}
+function setText(id,value,placeholder){const el=$(id);el.textContent=value.trim()||placeholder;el.classList.toggle('empty',!value.trim())}
+function updatePreview(){
+ $('pName').textContent=$('name').value.trim()||'이름을 입력해 주세요';
+ setText('pIntro',$('introText').value,'자기소개가 여기에 표시됩니다.');
+ setText('pEducation',$('education').value,'학력 정보를 입력해 주세요.');
+ setText('pCareer',$('career').value,'경력 정보를 입력해 주세요.');
+ setText('pCerts',$('certs').value,'자격증 정보를 입력해 주세요.');
+ for(const [field,target] of [['strengths','pStrengths'],['skills','pSkills']]){
+  const values=lines($(field).value);$(target).innerHTML=values.length?values.map(v=>`<span class="chip">${esc(v)}</span>`).join(''):`<span class="empty">${field==='strengths'?'핵심 역량':'보유 기술'}을 입력해 주세요.</span>`;
+ }
+ const links=$('projects').value.split('\n').map(s=>s.trim()).filter(Boolean);const projectBox=$('pProjects');
+ projectBox.innerHTML=links.length?links.map(line=>{const parts=line.split('|');const title=(parts.length>1?parts[0]:line).trim();const raw=(parts.length>1?parts.slice(1).join('|'):line).trim();let url;try{url=new URL(raw);if(!['http:','https:'].includes(url.protocol))url=null}catch(e){url=null}return url?`<div class="link-item"><a href="${esc(url.href)}" target="_blank" rel="noopener noreferrer">${esc(title)}</a><div>${esc(url.hostname)}</div></div>`:`<div class="link-item">${esc(title)} <span class="empty">(올바른 http(s) 링크를 입력해 주세요)</span></div>`}).join(''):'<span class="empty">프로젝트 또는 영상 링크를 추가해 주세요.</span>';
+ const avatar=$('previewAvatar');avatar.innerHTML=photoData?`<img src="${photoData}" alt="프로필 사진">`:'사진 없음';
+ $('pPpt').innerHTML=pptName?`<div class="ppt-item"><span>📎</span><span>${esc(pptName)}</span>${pptData?`<a href="${pptData}" download="${esc(pptName)}">파일 저장</a>`:''}</div>`:'PPT 파일을 업로드해 주세요.';$('pPpt').classList.toggle('empty',!pptName);
+}
+function collect(){const data={};fields.forEach(f=>data[f]=$(f).value);data.photoData=photoData;data.pptData=pptData;data.pptName=pptName;data.updatedAt=new Date().toISOString();return data}
+function apply(data){if(!data||typeof data!=='object')throw new Error('올바른 프로필 데이터가 아닙니다.');fields.forEach(f=>$(f).value=typeof data[f]==='string'?data[f]:'');photoData=typeof data.photoData==='string'?data.photoData:'';pptData=typeof data.pptData==='string'?data.pptData:'';pptName=typeof data.pptName==='string'?data.pptName:'';$('photo').value='';$('ppt').value='';updatePreview()}
+function status(message){$('saveStatus').textContent=message}
+fields.forEach(f=>$(f).addEventListener('input',updatePreview));
+$('photo').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;if(!file.type.startsWith('image/')){alert('이미지 파일을 선택해 주세요.');e.target.value='';return}if(file.size>2*1024*1024){alert('사진은 2MB 이하 파일을 권장합니다.');e.target.value='';return}const reader=new FileReader();reader.onload=()=>{photoData=reader.result;updatePreview()};reader.readAsDataURL(file)});
+$('ppt').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;const ext=file.name.toLowerCase().split('.').pop();if(!['ppt','pptx'].includes(ext)){alert('PPT 또는 PPTX 파일을 선택해 주세요.');e.target.value='';return}if(file.size>5*1024*1024){alert('브라우저 저장 공간을 고려해 PPT 파일은 5MB 이하를 권장합니다.');e.target.value='';return}const reader=new FileReader();reader.onload=()=>{pptData=reader.result;pptName=file.name;updatePreview()};reader.readAsDataURL(file)});
+$('saveBtn').addEventListener('click',()=>{try{localStorage.setItem(STORAGE_KEY,JSON.stringify(collect()));status('저장 완료 · '+new Date().toLocaleTimeString('ko-KR'));alert('이 브라우저에 프로필을 저장했습니다.')}catch(err){alert('저장하지 못했습니다. 사진이나 PPT 파일의 용량을 줄이거나 JSON 백업을 이용해 주세요.');status('저장 실패')}});
+$('loadBtn').addEventListener('click',()=>{try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw){alert('저장된 프로필이 없습니다.');return}apply(JSON.parse(raw));status('저장된 프로필을 불러왔습니다.')}catch(err){alert('저장 데이터를 불러오지 못했습니다.')}});
+$('exportBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(collect(),null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='my-profile-backup.json';a.click();URL.revokeObjectURL(url);status('JSON 백업 파일을 내보냈습니다.');});
+$('importBtn').addEventListener('click',()=>$('jsonFile').click());
+$('jsonFile').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(reader.result);apply(data);status('JSON 백업을 복원했습니다.');alert('프로필을 복원했습니다. 필요하면 저장 버튼을 눌러 브라우저에도 저장하세요.')}catch(err){alert('JSON 파일을 읽을 수 없습니다. 올바른 백업 파일인지 확인해 주세요.')}e.target.value=''};reader.readAsText(file)});
+updatePreview();
+</script>
+</body>
+</html>
